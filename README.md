@@ -13,8 +13,8 @@ $ cd blog
 $ cp .env.example .env
 $ composer install
 $ php artisan key:generate
-$ php artisan migrate
-$ sudo php artisan storage:link
+$ php artisan migrate:fresh
+$ php artisan storage:link
 ```
 
 Обязательно открываем в редакторе файл .env и настраиваем доступ к базе данных:
