@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Admin\Category;
 
+use App\Contracts\Category\CreateCategoryModelInterface;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends FormRequest implements CreateCategoryModelInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +25,18 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => 'nullable|string',
-            'title' => 'required|string'
+            'slug' => ['nullable', 'string'],
+            'title' => ['required', 'string']
         ];
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->input('slug');
+    }
+
+    public function getTitle(): string
+    {
+        return $this->input('title');
     }
 }

@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Category\UpdateRequest;
 
-use App\Models\Category;
+use App\Services\Category\CategoryCreator;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, Category $category) {
-        $data = $request->validated();
-        $category->update($data);
+    private $categoryCreator;
 
-        return view('admin.category.show', compact('category'));
+    public function __construct(CategoryCreator $categoryCreator)
+    {
+        $this->categoryCreator = $categoryCreator;
+    }
+
+    public function __invoke(UpdateRequest $request)
+    {
+        $this->categoryCreator->edit($request);
+
+        return redirect()->route('admin.category.index');
     }
 }

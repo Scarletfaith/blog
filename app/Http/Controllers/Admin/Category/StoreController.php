@@ -5,23 +5,21 @@ namespace App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\StoreRequest;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-
-use App\Models\Category;
+use App\Services\Category\CategoryCreator;
 
 class StoreController extends Controller
 {
-    public function __invoke(StoreRequest $request) {
-        $data = $request->validated();
-        
-        $slug = Str::slug($data['title'], '-');
-        $count = DB::table('posts')->whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-        $data['slug'] = $count ? "{$slug}-{$count}" : $slug;
+    private $categoryCreator;
 
-        Category::create($data);
+    public function __construct(CategoryCreator $categoryCreator)
+    {
+        $this->categoryCreator = $categoryCreator;
+    }
         
+    public function __invoke(StoreRequest $request)
+    {
+        $this->categoryCreator->create($request);
+
         return redirect()->route('admin.category.index');
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Admin\Post;
 
+use App\Contracts\Post\EditPostModelInterface;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Exists;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends FormRequest implements EditPostModelInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +26,37 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => 'nullable|string',
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'preview_image' => 'nullable|file',
-            'category_id' => 'nullable|array',
-            'category_id.*' => 'nullable|integer|exists:categories,id'
+            'slug' => ['nullable', 'string'],
+            'title' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'preview_image' => ['nullable', 'file'],
+            'category_id' => ['nullable', 'array'],
+            'category_id.*' => ['nullable', 'integer', new Exists('categories', 'id')]
         ];
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->input('slug');
+    }
+
+    public function getTitle(): string
+    {
+        return $this->input('title');
+    }
+
+    public function getPostContent(): string
+    {
+        return $this->input('content');
+    }
+
+    public function getPostPreviewImage(): ?object
+    {
+        return $this->file('preview_image');
+    }
+
+    public function getCategoryIds(): ?array
+    {
+        return $this->input('category_id');
     }
 }

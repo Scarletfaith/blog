@@ -3,37 +3,23 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Post;
 use App\Http\Requests\Admin\Post\UpdateRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
+use App\Services\Post\PostCreator;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, Post $post) {
-        $data = $request->validated([
-            'title' => 'required:unique:posts|max:255'
-        ]);
+    private $postCreator;
 
-        $category_ids = $data['category_id'];
-        unset($data['category_id']);
+    public function __construct(PostCreator $postCreator)
+    {
+        $this->postCreator = $postCreator;
+    }
 
-        $slug = Str::slug($data['title'], '-');
-        $count = DB::table('posts')->whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-        $data['slug'] = $count ? "{$slug}-{$count}" : $slug;
+    public function __invoke(UpdateRequest $request)
+    {
+        $this->postCreator->edit($request);        
 
-        if (isset($data['preview_image'])) {
-            $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-        }
-
-        //dd($data);
-
-        $post->update($data);
-        $post->categories()->sync($category_ids);
-
-        return view('admin.post.show', compact('post'));
+        return redirect()->route('admin.post.index');
     }
 }

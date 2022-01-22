@@ -3,14 +3,22 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Category\CategoryIndex;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
+    private $categoryIndex;
+
+    public function __construct(CategoryIndex $categoryIndex)
+    {
+        $this->categoryIndex = $categoryIndex;
+    }
+
     public function __invoke() {
-        $categories = DB::table('categories')->get();
+        $categories = $this->categoryIndex->index();
         return view('admin.category.index', compact('categories'));
     }
 }
