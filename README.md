@@ -11,10 +11,6 @@
 $ git clone https://github.com/Scarletfaith/blog.git
 $ cd blog
 $ cp .env.example .env
-$ composer install
-$ php artisan key:generate
-$ php artisan migrate:fresh
-$ php artisan storage:link
 ```
 
 Обязательно открываем в редакторе файл .env и настраиваем доступ к базе данных:
@@ -26,6 +22,15 @@ DB_PORT=3306 [Не меняете, если не используется дру
 DB_DATABASE=laravel [Название БД]
 DB_USERNAME=root [Логин к БД]
 DB_PASSWORD= [Пароль к БД]
+```
+
+Продолжаем настройку
+
+```bash
+$ composer install
+$ php artisan key:generate
+$ php artisan migrate:fresh
+$ php artisan storage:link
 ```
 
 ## Добавление Seeds
