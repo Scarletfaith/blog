@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashb
 
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
         Route::get('/', 'CategoryController@index')->name('admin.category.index');
-        Route::get('/create', 'CategoryController@createPage')->name('admin.category.create');
+        Route::get('/create', 'CategoryController@create')->name('admin.category.create');
         Route::post('/', 'CategoryController@store')->name('admin.category.store');
         Route::get('/{id}', 'CategoryController@show')->name('admin.category.show');
         Route::get('/{id}/edit', 'CategoryController@edit')->name('admin.category.edit');
