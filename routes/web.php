@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Blog\MainController;
 use App\Http\Controllers\Blog\ShowController;
 use App\Http\Controllers\Category\CategoryController;
-use App\Http\Controllers\Admin\Category\IndexController;
+//use App\Http\Controllers\Admin\Category\IndexController;
 //use App\Http\Controllers\PostsController;
 
 /*
@@ -37,23 +37,23 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashb
     })->name('dashboard');
 
     Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
-        Route::get('/', 'IndexController')->name('admin.post.index');
-        Route::get('/create', 'CreateController')->name('admin.post.create');
-        Route::post('/', 'StoreController')->name('admin.post.store');
-        Route::get('/{post}', 'ShowController')->name('admin.post.show');
-        Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
-        Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
-        Route::delete('/{post}', 'DeleteController')->name('admin.post.delete');
+        Route::get('/', 'PostController@index')->name('admin.post.index');
+        Route::get('/create', 'PostController@createPage')->name('admin.post.create');
+        Route::post('/', 'PostController@store')->name('admin.post.store');
+        Route::get('/{id}', 'PostController@show')->name('admin.post.show');
+        Route::get('/{id}/edit', 'PostController@edit')->name('admin.post.edit');
+        Route::patch('/{id}', 'PostController@update')->name('admin.post.update');
+        Route::delete('/{id}', 'PostController@delete')->name('admin.post.delete');
     });
 
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
-        Route::get('/', 'IndexController')->name('admin.category.index');
-        Route::get('/create', 'CreateController')->name('admin.category.create');
-        Route::post('/', 'StoreController')->name('admin.category.store');
-        Route::get('/{category}', 'ShowController')->name('admin.category.show');
-        Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
-        Route::patch('/{category}', 'UpdateController')->name('admin.category.update');
-        Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
+        Route::get('/', 'CategoryController@index')->name('admin.category.index');
+        Route::get('/create', 'CategoryController@createPage')->name('admin.category.create');
+        Route::post('/', 'CategoryController@store')->name('admin.category.store');
+        Route::get('/{id}', 'CategoryController@show')->name('admin.category.show');
+        Route::get('/{id}/edit', 'CategoryController@edit')->name('admin.category.edit');
+        Route::patch('/{id}', 'CategoryController@update')->name('admin.category.update');
+        Route::delete('/{id}', 'CategoryController@delete')->name('admin.category.delete');
     });
 });
 

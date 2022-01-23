@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Database\Eloquent\Builder;
-
-use App\Models\Post;
-use App\Models\Category;
+use App\Services\SlugServices;
 
 class SlugController extends Controller
 {
+    private $SlugServices;
+
+    public function __construct(SlugServices $SlugServices) {
+        $this->SlugServices = $SlugServices;
+    }
+
     public function call($slug) {
-        $post = Post::where('slug', $slug)->first();
+        $post = $this->SlugServices->getPostSlug($slug);
 
         if (!is_null($post)) {
             return $this->post($post);
         } else {
-            $category = Category::where('slug', $slug)->first();
+            $category = $this->SlugServices->getCategorySlug($slug);
 
             if (!is_null($category)) {
                 return $this->category($category);
@@ -30,22 +30,16 @@ class SlugController extends Controller
     }
 
     public function category($category) {
-        $categories = Category::all();
-        $catid = $category->id;
-        $category_id = DB::table('categories')->where('id', $category->id)->first();
-        //$posts = Post::with('categories')->get();
-        $posts = Post::whereHas('categories', function(Builder $query) use ($catid) {
-            $query->where('categories.id', $catid);
-        })->paginate(6);
+        $categories = $this->SlugServices->getCategories();
+        $posts = $this->SlugServices->getPostsInCategory($category->id);
 
-        // dd($posts);
-
-        return view('category.index', compact('posts', 'categories', 'category_id'));
+        return view('category.index')->with('posts', $posts)->with('categories', $categories);
     }
 
-    public function post($posts) {
-        $categories = Category::all();
-        $post = Post::all()->where('id', $posts->id)->first();
-        return view('blog.show', compact('post', 'categories'));
+    public function post($post) {
+        $post = $this->SlugServices->getPost($post);
+        $categories = $this->SlugServices->getCategories();
+
+        return view('blog.show')->with('post', $post)->with('categories', $categories);
     }
 }
