@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Category;
+namespace App\Services\Admin\Category;
 
 use App\Contracts\Category\CreateCategoryModelInterface;
 use App\Contracts\Category\EditCategoryModelInterface;

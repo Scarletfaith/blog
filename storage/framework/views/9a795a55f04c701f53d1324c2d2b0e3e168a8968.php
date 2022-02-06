@@ -20,26 +20,26 @@
                         <tbody class="bg-white">
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">id</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post->id); ?></td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post['id']); ?></td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Post name</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><b><?php echo e($post->title); ?></b></td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><b><?php echo e($post['title']); ?></b></td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Created</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post->created_at); ?></td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post['created_at']); ?></td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Last Updated</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post->updated_at); ?></td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><?php echo e($post['updated_at']); ?></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="flex items-center justify-center mb-4">
-                        <a href="<?php echo e(route('admin.post.edit', $post->id)); ?>" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l inline-flex items-center">Edit</a>
-                        <form action="<?php echo e(route('admin.post.delete', $post->id)); ?>" method="POST" class="w-full">
+                        <a href="<?php echo e(route('admin.post.edit', $post['id'])); ?>" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l inline-flex items-center">Edit</a>
+                        <form action="<?php echo e(route('admin.post.delete', $post['id'])); ?>" method="POST" class="w-full">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('delete'); ?>
                             <button type="submit" class="bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-r inline-flex items-center cursor-pointer">Delete</button>

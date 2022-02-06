@@ -66,7 +66,7 @@ Route::group(['namespace' => 'Category'], function () {
 });
 
 Route::group(['namespace' => 'Blog'], function () {
-    Route::get('/', 'MainController')->name('blog.index');
+    Route::get('/', 'MainController@index')->name('blog.index');
     Route::get('/{post}', 'SlugController@post')->name('blog.show');
 });
 

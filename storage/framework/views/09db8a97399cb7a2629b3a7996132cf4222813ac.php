@@ -29,12 +29,12 @@
                         <tbody class="bg-white">
                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr class="whitespace-nowrap">
-                                    <td class="px-6 py-4 text-sm text-gray-500"><?php echo e($category['id']); ?></td>
-                                    <td class="px-6 py-4"><?php echo e($category['title']); ?></td>
-                                    <td><a href="<?php echo e(route('admin.category.show', $category['id'])); ?>" class="border-2 border-gray-300 hover:border-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Info</a></td>
-                                    <td><a href="<?php echo e(route('admin.category.edit', $category['id'])); ?>" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Edit</a></td>
+                                    <td class="px-6 py-4 text-sm text-gray-500"><?php echo e($category->id); ?></td>
+                                    <td class="px-6 py-4"><?php echo e($category->title); ?></td>
+                                    <td><a href="<?php echo e(route('admin.category.show', $category->id)); ?>" class="border-2 border-gray-300 hover:border-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Info</a></td>
+                                    <td><a href="<?php echo e(route('admin.category.edit', $category->id)); ?>" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Edit</a></td>
                                     <td>
-                                        <form action="<?php echo e(route('admin.category.delete', $category['id'])); ?>" method="POST" class="w-full">
+                                        <form action="<?php echo e(route('admin.category.delete', $category->id)); ?>" method="POST" class="w-full">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('delete'); ?>
                                             <button type="submit" class="bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center cursor-pointer">Delete</button>

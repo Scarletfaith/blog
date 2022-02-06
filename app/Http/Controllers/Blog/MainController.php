@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Blog\BlogServices;
 
-use App\Models\Post;
-use App\Models\Category;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function __invoke() {
-        $categories = Category::all();
-        $posts = Post::paginate(6);
-        return view('blog.index', compact('posts', 'categories'));
+    private $BlogServices;
+
+    public function __construct(BlogServices $BlogServices) {
+        $this->BlogServices = $BlogServices;
+    }
+
+    public function index() {
+        $posts = $this->BlogServices->getAll();
+        $categories = $this->BlogServices->getCategories();
+
+        return view('blog.index')->with('data', [
+            'posts'         => $posts,
+            'categories'    => $categories
+        ]);
     }
 }

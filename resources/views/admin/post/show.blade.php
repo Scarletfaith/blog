@@ -14,26 +14,26 @@
                         <tbody class="bg-white">
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">id</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post->id }}</td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post['id'] }}</td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Post name</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><b>{{ $post->title }}</b></td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500"><b>{{ $post['title'] }}</b></td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Created</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post->created_at }}</td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post['created_at'] }}</td>
                             </tr>
                             <tr class="whitespace-nowrap">
                                 <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">Last Updated</td>
-                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post->updated_at }}</td>
+                                <td class="border border-gray-400 px-6 py-4 text-sm text-gray-500">{{ $post['updated_at'] }}</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="flex items-center justify-center mb-4">
-                        <a href="{{ route('admin.post.edit', $post->id) }}" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l inline-flex items-center">Edit</a>
-                        <form action="{{ route('admin.post.delete', $post->id) }}" method="POST" class="w-full">
+                        <a href="{{ route('admin.post.edit', $post['id']) }}" class="bg-green-300 hover:bg-green-400 text-gray-800 font-bold py-2 px-4 rounded-l inline-flex items-center">Edit</a>
+                        <form action="{{ route('admin.post.delete', $post['id']) }}" method="POST" class="w-full">
                             @csrf
                             @method('delete')
                             <button type="submit" class="bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-r inline-flex items-center cursor-pointer">Delete</button>

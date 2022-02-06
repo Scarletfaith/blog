@@ -33,7 +33,7 @@
                     <div class="lg:ml-auto mt-10 lg:mt-0 flex items-center">
                         <a href="/" class="ml-5 no-underline hover:underline uppercase">HOME</a>
 
-                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $data['categories']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             
                         <a href="<?php echo e(route('category.index', $category->slug)); ?>" class="ml-5 no-underline hover:underline uppercase"><?php echo e($category->title); ?></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

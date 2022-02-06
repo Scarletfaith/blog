@@ -19,11 +19,11 @@
                     <script src="<?php echo e(asset('ckeditor4/ckeditor.js')); ?>"></script>
                     <script src="<?php echo e(asset('ckfinder/ckfinder.js')); ?>"></script>
 
-                    <form action="<?php echo e(route('admin.post.update', $post->id)); ?>" method="POST" enctype="multipart/form-data" class="w-full">
+                    <form action="<?php echo e(route('admin.post.update', $post['id'])); ?>" method="POST" enctype="multipart/form-data" class="w-full">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PATCH'); ?>
                         <div class="flex items-center border-b border-gray-400 border-teal-500 mb-4 py-2">
-                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Post name" aria-label="Post name..." name="title" value="<?php echo e($post->title); ?>">
+                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Post name" aria-label="Post name..." name="title" value="<?php echo e($post['title']); ?>">
                         </div>
                         <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -39,8 +39,8 @@ unset($__errorArgs, $__bag); ?>
                         <label class="block text-left" style="max-width: 300px">
                             <span class="text-gray-700">Select categories</span>
                             <select class="form-multiselect block w-full mt-1" name="category_id[]" multiple>
-                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option <?php echo e(is_array($post->categories->pluck('id')->toArray()) && in_array($category->id, $post->categories->pluck('id')->toArray()) ? ' selected' : ''); ?> value="<?php echo e($category->id); ?>"><?php echo e($category->title); ?></option>
+                                <?php $__currentLoopData = $post['categories']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option <?php echo e(is_array($post['categories']->pluck('id')->toArray()) && in_array($category->id, $post['categories']->pluck('id')->toArray()) ? ' selected' : ''); ?> value="<?php echo e($category->id); ?>"><?php echo e($category->title); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </label>
@@ -56,7 +56,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-                        <textarea name="content" id="ckeditor" rows="10" cols="80"><?php echo e($post->content); ?></textarea>
+                        <textarea name="content" id="ckeditor" rows="10" cols="80"><?php echo e($post['content']); ?></textarea>
                         
                         <?php $__errorArgs = ['content'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -76,7 +76,7 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="w-25 grid">
                                 <span class="text-center mb-2">Current preview image:</span>
-                                <img src="<?php echo e(asset('storage/' . $post->preview_image)); ?>" alt="Preview image" class="h-40 border-2 px-6 py-2">
+                                <img src="<?php echo e(asset('storage/' . $post['preview_image'])); ?>" alt="Preview image" class="h-40 border-2 px-6 py-2">
                             </div>
                         </div>
 

@@ -10,11 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     
-                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data" class="w-full">
+                    <form action="{{ route('admin.category.update', $category['id']) }}" method="POST" enctype="multipart/form-data" class="w-full">
                         @csrf
                         @method('PATCH')
                         <div class="flex items-center border-b border-teal-500 py-2">
-                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Category name" aria-label="Category name..." name="title" value="{{ $category->title }}">
+                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Category name" aria-label="Category name..." name="title" value="{{ $category['title'] }}">
                           <input type="submit" class="flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-4 rounded" value="Save">
                         </div>
                         @error('title')

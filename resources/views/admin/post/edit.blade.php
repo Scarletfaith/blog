@@ -13,11 +13,11 @@
                     <script src="{{ asset('ckeditor4/ckeditor.js') }}"></script>
                     <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
 
-                    <form action="{{ route('admin.post.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="w-full">
+                    <form action="{{ route('admin.post.update', $post['id']) }}" method="POST" enctype="multipart/form-data" class="w-full">
                         @csrf
                         @method('PATCH')
                         <div class="flex items-center border-b border-gray-400 border-teal-500 mb-4 py-2">
-                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Post name" aria-label="Post name..." name="title" value="{{ $post->title }}">
+                          <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Post name" aria-label="Post name..." name="title" value="{{ $post['title'] }}">
                         </div>
                         @error('title')
                             <div class="text-red-600">Enter the post name!</div>
@@ -26,8 +26,8 @@
                         <label class="block text-left" style="max-width: 300px">
                             <span class="text-gray-700">Select categories</span>
                             <select class="form-multiselect block w-full mt-1" name="category_id[]" multiple>
-                                @foreach ($categories as $category)
-                                    <option {{ is_array($post->categories->pluck('id')->toArray()) && in_array($category->id, $post->categories->pluck('id')->toArray()) ? ' selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
+                                @foreach ($post['categories'] as $category)
+                                    <option {{ is_array($post['categories']->pluck('id')->toArray()) && in_array($category->id, $post['categories']->pluck('id')->toArray()) ? ' selected' : '' }} value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
                             </select>
                         </label>
@@ -36,7 +36,7 @@
                         <div class="text-red-600">Select the post category!</div>
                         @enderror
 
-                        <textarea name="content" id="ckeditor" rows="10" cols="80">{{ $post->content }}</textarea>
+                        <textarea name="content" id="ckeditor" rows="10" cols="80">{{ $post['content'] }}</textarea>
                         
                         @error('content')
                             <div class="text-red-600">Enter the post content!</div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="w-25 grid">
                                 <span class="text-center mb-2">Current preview image:</span>
-                                <img src="{{ asset('storage/' . $post->preview_image) }}" alt="Preview image" class="h-40 border-2 px-6 py-2">
+                                <img src="{{ asset('storage/' . $post['preview_image']) }}" alt="Preview image" class="h-40 border-2 px-6 py-2">
                             </div>
                         </div>
 

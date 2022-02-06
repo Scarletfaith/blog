@@ -2,7 +2,7 @@
 
 <div class="container mx-auto px-5 lg:max-w-screen-sm">
 
-    <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php $__currentLoopData = $data['posts']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <a class="no-underline transition block border border-lighter w-full mb-10 p-5 rounded post-card" href="<?php echo e(route('blog.show', $post->slug)); ?>">
             <div class="block h-post-card-image bg-cover bg-center bg-no-repeat w-full h-48 mb-5" style="background-image: url('<?php echo e('storage/' . $post->preview_image); ?>')"></div>
             <div class="flex flex-col justify-between flex-1">
@@ -28,7 +28,7 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     <div class="uppercase flex items-center justify-center flex-1 py-5 font-sans">
-        <?php echo e($posts->links()); ?>
+        <?php echo e($data['posts']->links()); ?>
 
     </div>
 </div>

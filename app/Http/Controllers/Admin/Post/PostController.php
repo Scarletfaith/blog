@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\Http\Controllers\Controller;
-use App\Services\Post\PostServices;
+use App\Services\Admin\Post\PostServices;
 use App\Http\Requests\Admin\Post\StoreRequest;
 use App\Http\Requests\Admin\Post\UpdateRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -30,11 +28,17 @@ class PostController extends Controller
     public function show(Request $request) {
         $post = $this->PostServices->show($request->id);
 
-        return view('admin.post.show')->with('post', $post);
+        return view('admin.post.show')->with('post', [
+            'id'            => $post->id,
+            'title'         => $post->title,
+            'created_at'    => $post->created_at,
+            'updated_at'    => $post->updated_at
+        ]);
     }
 
     public function createPage() {
-        $categories = Category::all();
+        $categories = $this->PostServices->getCategories();
+
         return view('admin.post.create')->with('categories', $categories);
     }
 
@@ -46,9 +50,15 @@ class PostController extends Controller
 
     public function edit(Request $request) {
         $post = $this->PostServices->show($request->id);
-        $categories = Category::all();
+        $categories = $this->PostServices->getCategories();
 
-        return view('admin.post.edit')->with('post', $post)->with('categories', $categories);
+        return view('admin.post.edit')->with('post', [
+            'id'            => $post->id,
+            'title'         => $post->title,
+            'content'       => $post->content,
+            'preview_image' => $post->preview_image,
+            'categories'    => $categories
+        ]);
     }
 
     public function update(UpdateRequest $request)
@@ -60,8 +70,6 @@ class PostController extends Controller
 
     public function delete(Request $request) {
         $this->PostServices->delete($request->id);
-        /*PostCategory::where('post_id', $post->id)->delete();
-        $post->delete();*/
 
         return redirect()->route('admin.post.index');
     }

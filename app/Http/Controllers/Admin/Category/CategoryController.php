@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use App\Services\Category\CategoryServices;
+use App\Services\Admin\Category\CategoryServices;
 
 use App\Http\Requests\Admin\Category\StoreRequest;
 use App\Http\Requests\Admin\Category\UpdateRequest;
@@ -20,13 +20,8 @@ class CategoryController extends Controller {
 
     public function index() {
         $categories = $this->CategoryServices->getAll();
-        foreach ($categories as $category) {
-            $data[] = array(
-                'id'    => $category->id,
-                'title' => $category->title
-            );
-        }
-        return view('admin.category.index')->with('categories', $data);
+
+        return view('admin.category.index')->with('categories', $categories);
     }
 
     public function show(Request $request) {
@@ -53,7 +48,10 @@ class CategoryController extends Controller {
     public function edit(Request $request) {
         $category = $this->CategoryServices->show($request->id);
 
-        return view('admin.category.edit')->with('category', $category);
+        return view('admin.category.edit')->with('category', [
+            'id'        => $category->id,
+            'title'     => $category->title
+        ]);
     }
 
     public function update(UpdateRequest $request) {

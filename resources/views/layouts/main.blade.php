@@ -33,7 +33,7 @@
                     <div class="lg:ml-auto mt-10 lg:mt-0 flex items-center">
                         <a href="/" class="ml-5 no-underline hover:underline uppercase">HOME</a>
 
-                        @foreach ($categories as $category)
+                        @foreach ($data['categories'] as $category)
                             
                         <a href="{{ route('category.index', $category->slug) }}" class="ml-5 no-underline hover:underline uppercase">{{ $category->title }}</a>
                         @endforeach

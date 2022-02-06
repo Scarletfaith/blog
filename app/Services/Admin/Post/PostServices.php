@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Post;
+namespace App\Services\Admin\Post;
 
 use App\Contracts\Post\CreatePostModelInterface;
 use App\Contracts\Post\EditPostModelInterface;
@@ -28,6 +28,12 @@ class PostServices
         $posts = DB::table('posts')->get();
 
         return $posts;
+    }
+
+    public function getCategories() {
+        $categories = DB::table('categories')->get();
+
+        return $categories;
     }
 
     public function show($post_id) {
