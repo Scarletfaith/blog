@@ -9,11 +9,13 @@ class SlugController extends Controller
 {
     private $SlugServices;
 
-    public function __construct(SlugServices $SlugServices) {
+    public function __construct(SlugServices $SlugServices)
+    {
         $this->SlugServices = $SlugServices;
     }
 
-    public function call($slug) {
+    public function call($slug)
+    {
         $post = $this->SlugServices->getPostSlug($slug);
 
         if (!is_null($post)) {
@@ -24,19 +26,22 @@ class SlugController extends Controller
             if (!is_null($category)) {
                 return $this->category($category);
             } else {
-                return redirect('/');;
+                return redirect('/');
+                ;
             }
         }
     }
 
-    public function category($category) {
+    public function category($category)
+    {
         $categories = $this->SlugServices->getCategories();
         $posts = $this->SlugServices->getPostsInCategory($category->id);
 
         return view('category.index')->with('posts', $posts)->with('categories', $categories);
     }
 
-    public function post($post) {
+    public function post($post)
+    {
         $post = $this->SlugServices->getPost($post);
         $categories = $this->SlugServices->getCategories();
 

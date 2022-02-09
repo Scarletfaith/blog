@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Contracts\Post;
 
+use Illuminate\Http\UploadedFile;
+
 interface CreatePostModelInterface
 {
     public function getSlug(): ?string;
@@ -12,7 +14,7 @@ interface CreatePostModelInterface
 
     public function getPostContent(): string;
 
-    public function getPostPreviewImage(): object;
+    public function getPostPreviewImage(): UploadedFile;
 
     public function getCategoryIds(): ?array;
 }

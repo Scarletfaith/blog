@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Post;
 
 use App\Contracts\Post\EditPostModelInterface;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\Exists;
 
 class UpdateRequest extends FormRequest implements EditPostModelInterface
@@ -50,7 +51,7 @@ class UpdateRequest extends FormRequest implements EditPostModelInterface
         return $this->input('content');
     }
 
-    public function getPostPreviewImage(): ?object
+    public function getPostPreviewImage(): ?UploadedFile
     {
         return $this->file('preview_image');
     }

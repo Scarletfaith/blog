@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'dashb
 
     Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
         Route::get('/', 'PostController@index')->name('admin.post.index');
-        Route::get('/create', 'PostController@createPage')->name('admin.post.create');
+        Route::get('/create', 'PostController@create')->name('admin.post.create');
         Route::post('/', 'PostController@store')->name('admin.post.store');
         Route::get('/{id}', 'PostController@show')->name('admin.post.show');
         Route::get('/{id}/edit', 'PostController@edit')->name('admin.post.edit');

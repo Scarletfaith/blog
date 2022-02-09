@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Post;
 
 use App\Contracts\Post\CreatePostModelInterface;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\Exists;
 
 class StoreRequest extends FormRequest implements CreatePostModelInterface
@@ -50,7 +51,7 @@ class StoreRequest extends FormRequest implements CreatePostModelInterface
         return $this->input('content');
     }
 
-    public function getPostPreviewImage(): object
+    public function getPostPreviewImage(): UploadedFile
     {
         return $this->file('preview_image');
     }

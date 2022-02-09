@@ -1,3 +1,9 @@
+<?php
+
+/** @var \App\Models\Post $posts */
+
+?>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -36,7 +42,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach                        
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

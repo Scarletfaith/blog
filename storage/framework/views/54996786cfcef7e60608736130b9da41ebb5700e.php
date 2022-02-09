@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
-        
+
         <link href="https://fonts.googleapis.com/css?family=Miriam+Libre:400,700|Merriweather" rel="stylesheet">
 
         <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
@@ -33,8 +33,8 @@
                     <div class="lg:ml-auto mt-10 lg:mt-0 flex items-center">
                         <a href="/" class="ml-5 no-underline hover:underline uppercase">HOME</a>
 
-                        <?php $__currentLoopData = $data['categories']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
                         <a href="<?php echo e(route('category.index', $category->slug)); ?>" class="ml-5 no-underline hover:underline uppercase"><?php echo e($category->title); ?></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
@@ -50,7 +50,7 @@
                     Follow the <a href="/feed">RSS Feed</a>.
                 </div>
             </div>
-        </div>        
+        </div>
     </body>
 </html>
 <?php /**PATH /var/www/blog/resources/views/layouts/main.blade.php ENDPATH**/ ?>

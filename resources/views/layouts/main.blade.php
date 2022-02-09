@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        
+
         <link href="https://fonts.googleapis.com/css?family=Miriam+Libre:400,700|Merriweather" rel="stylesheet">
 
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -33,8 +33,8 @@
                     <div class="lg:ml-auto mt-10 lg:mt-0 flex items-center">
                         <a href="/" class="ml-5 no-underline hover:underline uppercase">HOME</a>
 
-                        @foreach ($data['categories'] as $category)
-                            
+                        @foreach ($categories as $category)
+
                         <a href="{{ route('category.index', $category->slug) }}" class="ml-5 no-underline hover:underline uppercase">{{ $category->title }}</a>
                         @endforeach
                     </div>
@@ -50,6 +50,6 @@
                     Follow the <a href="/feed">RSS Feed</a>.
                 </div>
             </div>
-        </div>        
+        </div>
     </body>
 </html>

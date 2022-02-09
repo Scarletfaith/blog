@@ -3,25 +3,28 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use App\Services\Blog\BlogServices;
-
-use Illuminate\Http\Request;
+use App\Services\Blog\BlogService;
 
 class MainController extends Controller
 {
-    private $BlogServices;
+    private $blogService;
 
-    public function __construct(BlogServices $BlogServices) {
-        $this->BlogServices = $BlogServices;
+    public function __construct(BlogService $BlogService)
+    {
+        $this->blogService = $BlogService;
     }
 
-    public function index() {
-        $posts = $this->BlogServices->getAll();
-        $categories = $this->BlogServices->getCategories();
+    public function index()
+    {
+        $posts = $this->blogService->getAll();
+        $categories = $this->blogService->getCategories();
 
-        return view('blog.index')->with('data', [
+        return view(
+            'blog.index',
+            [
             'posts'         => $posts,
             'categories'    => $categories
-        ]);
+            ]
+        );
     }
 }
