@@ -48,7 +48,12 @@ class PostController extends Controller
     {
         $categories = $this->postRepository->getCategories();
 
-        return view('admin.post.create')->with('categories', $categories);
+        return view(
+            'admin.post.create',
+            [
+            'categories' => $categories
+            ]
+        );
     }
 
     public function store(StoreRequest $request)
